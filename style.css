@@ -1,0 +1,417 @@
+/* 
+  Theme: Minimal Premium - Arjun M S Portfolio
+  Accent Color: Purple (#7C3AED)
+  Font: 'Lexend' for body, 'La Belle Aurore' for logo
+*/
+
+/* Import Lexend (primary font) and La Belle Aurore (logo cursive) */
+@import url('https://fonts.googleapis.com/css2?family=La+Belle+Aurore&family=Lexend:wght@400;500;600&display=swap');
+
+:root {
+  /* Colors */
+  --bg-color: #ffffff;
+  --text-primary: #111827; /* gray-900 */
+  --text-secondary: #6b7280; /* gray-500 / muted-foreground */
+  --accent-color: #7C3AED;
+  --accent-hover: #6D28D9;
+  --border-color: #e5e7eb;
+  --card-bg: #f9fafb;
+  
+  /* Spacing */
+  --container-width: 36rem; /* max-w-xl */
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2.5rem;
+
+  /* Typography */
+  --font-main: 'Lexend', ui-sans-serif, system-ui, sans-serif;
+  --font-logo: 'La Belle Aurore', cursive;
+}
+
+/* Global font application */
+body {
+  font-family: var(--font-main);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Ensure all form elements inherit font */
+input, button, textarea, select {
+  font-family: inherit;
+}
+
+/* Container */
+.container {
+  max-width: var(--container-width);
+  margin: 0 auto;
+  padding: 0 1rem; /* px-4 */
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+    flex: 1;
+}
+
+/* Header */
+header {
+  padding: var(--spacing-lg) 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-weight: 400;
+  font-size: 1.75rem;
+  font-family: var(--font-logo);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--text-primary);
+  transition: color 0.2s ease;
+}
+
+.logo:hover {
+  color: var(--accent-color);
+}
+
+.logo img {
+  height: 40px;
+  width: auto;
+}
+
+nav ul {
+  display: flex;
+  gap: var(--spacing-lg);
+  list-style: none;
+}
+
+nav a {
+  font-weight: 500;
+  color: var(--text-secondary);
+  position: relative;
+}
+
+nav a:hover, nav a.active {
+  color: var(--accent-color);
+}
+
+/* Hero Section */
+.hero {
+  padding: var(--spacing-xl) 0;
+}
+
+.hero h1 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: var(--text-primary);
+  transition: color 0.2s ease;
+  cursor: default;
+}
+
+.hero h1:hover {
+  color: var(--accent-color);
+}
+
+.hero p.tagline {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  max-width: 500px;
+  margin-bottom: var(--spacing-md);
+  line-height: 1.6;
+}
+
+.hero-cta-text {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  line-height: 1.625;
+  margin-bottom: var(--spacing-lg);
+}
+
+.socials {
+  display: flex;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-lg);
+}
+
+.socials a {
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+}
+
+.socials a:hover {
+  color: var(--accent-color);
+  transform: translateY(-2px);
+}
+
+.cta-group {
+  display: flex;
+  gap: var(--spacing-md);
+}
+
+/* Global link reset */
+a, a:hover, a:focus, a:active, a:visited {
+  text-decoration: none !important;
+  color: inherit; /* Inherit color by default */
+  transition: color 0.2s ease;
+}
+
+.btn {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-weight: 500;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: none;
+}
+
+.btn-primary {
+  background-color: var(--accent-color);
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: var(--accent-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(124, 58, 237, 0.2);
+  color: white !important;
+}
+
+.btn-secondary {
+  background-color: var(--card-bg);
+  color: var(--text-primary);
+}
+
+.btn-secondary:hover {
+  background-color: #e2e8f0;
+}
+
+/* Newsletter */
+/* Newsletter */
+.scribble-line {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='12' viewBox='0 0 200 12'%3E%3Cpath d='M0 6 C 3 4, 7 8, 12 5 S 18 7, 25 6 S 33 4, 40 7 S 48 5, 55 6 S 62 8, 70 5 S 78 7, 85 6 S 93 4, 100 7 S 108 5, 115 6 S 123 8, 130 5 S 138 7, 145 6 S 153 4, 160 7 S 168 5, 175 6 S 183 8, 190 5 S 198 7, 200 6' stroke='%23d1d5db' fill='none' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-position: 50%;
+    background-repeat: repeat-x;
+    border: none;
+    height: 12px;
+    width: 100%;
+    opacity: 1; /* Reset opacity as provided SVG has specific stroke color */
+}
+
+.mb-8 {
+  margin-bottom: 2rem;
+}
+
+.newsletter {
+  margin-top: var(--spacing-lg); /* Reduced top margin since we have separator */
+  padding-top: var(--spacing-sm);
+  border-top: none; /* Removing previous dashed border */
+}
+
+.newsletter h3 {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-sm);
+}
+
+.newsletter p {
+  color: var(--text-secondary);
+  margin-bottom: var(--spacing-md);
+}
+
+.subscribe-form {
+  display: flex;
+  gap: var(--spacing-sm);
+  max-width: 500px;
+}
+
+.subscribe-form input {
+  flex: 1;
+  padding: 0.75rem;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  font-family: var(--font-main);
+}
+
+.subscribe-form input:focus {
+  outline: 2px solid var(--accent-color);
+  border-color: transparent;
+}
+
+/* Footer */
+footer {
+  margin-top: var(--spacing-xl);
+  padding: var(--spacing-lg) 0;
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+}
+
+/* Utilities */
+.hidden { display: none; }
+
+/* Page Specifics - Will add as we build more pages */
+.page-title {
+  font-size: 2rem;
+  margin-bottom: var(--spacing-lg);
+}
+
+/* Project Cards */
+.project-card {
+  margin-bottom: var(--spacing-lg);
+  padding-bottom: var(--spacing-lg);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.project-card:last-child {
+  border-bottom: none;
+}
+
+.project-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: var(--spacing-sm);
+}
+
+.project-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.project-title:hover {
+    color: var(--accent-color);
+    cursor: pointer;
+}
+
+.project-tags {
+    margin-bottom: var(--spacing-sm);
+}
+
+.tag {
+    background-color: var(--card-bg);
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    margin-right: 0.5rem;
+}
+
+.project-links a {
+    color: var(--accent-color);
+    font-size: 0.9rem;
+    margin-right: var(--spacing-md);
+    font-weight: 500;
+}
+
+.project-links a:hover {
+    text-decoration: none;
+    color: var(--accent-hover);
+}
+
+/* Blog Cards */
+/* Blog Layout */
+.blog-header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-xl);
+    flex-wrap: wrap; /* allow wrapping on small screens */
+    gap: var(--spacing-md);
+}
+
+.blog-header-container .page-title {
+    font-size: 1.25rem; /* Reduced from 2rem */
+    font-weight: 700;
+    margin-bottom: 0;
+}
+
+.search-bar {
+    display: flex;
+    align-items: center;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    padding: 0.5rem 0.75rem;
+    background-color: transparent;
+    width: 280px;
+}
+
+.search-bar input {
+    border: none;
+    outline: none;
+    background: transparent;
+    margin-left: 0.5rem;
+    width: 100%;
+    color: var(--text-primary);
+    font-family: var(--font-main);
+    font-size: 0.9rem;
+}
+
+.blog-card {
+    margin-bottom: var(--spacing-lg);
+    padding-bottom: var(--spacing-lg);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.blog-card:last-child {
+    border-bottom: none;
+}
+
+.blog-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    display: block;
+    color: var(--text-primary);
+}
+
+.blog-title:hover {
+    color: var(--accent-color);
+}
+
+.blog-meta-row {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+
+.blog-tag {
+    background-color: #f3f4f6; /* Light gray */
+    padding: 2px 8px;
+    border-radius: 4px;
+    color: #4b5563; /* Darker gray text */
+    font-size: 0.75rem;
+    font-weight: 500;
+}
+
+.blog-summary {
+    color: var(--text-secondary);
+    line-height: 1.6;
+    font-size: 0.95rem;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .logo span { display: none; } /* Hide text logo on mobile if needed, keep icon */
+  
+  nav ul {
+    gap: var(--spacing-md);
+  }
+  
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+  
+  .subscribe-form {
+    flex-direction: column;
+  }
+}

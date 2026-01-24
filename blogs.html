@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blogs - Arjun M S</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="assets/arjun-icon-bw.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <a href="index.html" style="display: flex; align-items: center; gap: 10px;">
+                    <img src="arjun-logo.png" alt="Arjun Logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
+                    <span style="display:none; font-family: cursive;">Arjun</span>
+                </a>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="blogs.html" class="active">Blogs</a></li>
+                    <li><a href="projects.html">Projects</a></li>
+                    <li><a href="about.html">About</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <main>
+            <div class="blog-header-container">
+                <h1 class="page-title" style="margin-bottom: 0;">Blogs</h1>
+                <div class="search-bar">
+                    <i class="fa-solid fa-magnifying-glass" style="color: var(--text-secondary); font-size: 0.8rem;"></i>
+                    <input type="text" placeholder="Search blogs..." id="search-input">
+                </div>
+            </div>
+
+            <!-- Blog List Container -->
+            <div id="blog-list-container">
+                <!-- Static Featured Post -->
+                <article class="blog-card" data-title="What Is pytest: Complete Guide With Best Practices" data-tag="Tech">
+                    <a href="https://www.testmu.ai/learning-hub/pytest-tutorial/" target="_blank" class="blog-title">
+                        What Is pytest: Complete Guide With Best Practices
+                    </a>
+                    <div class="blog-meta-row">
+                        <span class="blog-tag">Tech</span>
+                        <span class="blog-date">Featured</span>
+                    </div>
+                    <p class="blog-summary">
+                        A comprehensive deep-dive into pytest, one of the most popular testing frameworks for Python. 
+                        Learn how to write efficient tests, fixtures, and best practices for scalable test suites.
+                    </p>
+                </article>
+                
+                <!-- Container for Medium Posts -->
+                <div id="medium-posts-loader">
+                    <p style="color: var(--text-secondary);">Loading latest writings...</p>
+                </div>
+            </div>
+            
+        </main>
+
+        <footer>
+            <p>&copy; 2026 Arjun. All rights reserved.</p>
+        </footer>
+    </div>
+    
+    <script>
+        // Use a lightweight date formatter
+        const formatDate = (dateString) => {
+            const options = { day: 'numeric', month: 'long', year: 'numeric' };
+            return new Date(dateString).toLocaleDateString('en-GB', options);
+        };
+
+        // Fetch Medium RSS Feed converted to JSON
+        async function fetchMediumPosts() {
+            const loader = document.getElementById('medium-posts-loader');
+            const container = document.getElementById('blog-list-container'); // Append directly to main list
+            const RSS_URL = 'https://medium.com/feed/@arjun-ms';
+            const API_URL = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(RSS_URL)}`;
+
+            try {
+                const response = await fetch(API_URL);
+                const data = await response.json();
+
+                if (data.status === 'ok') {
+                    loader.remove(); // Remove loading text
+                    
+                    data.items.forEach(item => {
+                        const date = formatDate(item.pubDate);
+                        // Guess category from categories array if present, else default
+                        const tag = (item.categories && item.categories.length > 0) ? item.categories[0] : 'Writing';
+                        const snippet = item.description.replace(/<[^>]*>?/gm, '').substring(0, 180).trim() + '...';
+
+                        const card = document.createElement('article');
+                        card.className = 'blog-card';
+                        // Add data attributes for search
+                        card.setAttribute('data-title', item.title.toLowerCase());
+                        card.setAttribute('data-tag', tag.toLowerCase());
+
+                        card.innerHTML = `
+                            <a href="${item.link}" target="_blank" class="blog-title">${item.title}</a>
+                            <div class="blog-meta-row">
+                                <span class="blog-tag">${tag}</span>
+                                <span class="blog-date">${date}</span>
+                            </div>
+                            <p class="blog-summary">${snippet}</p>
+                        `;
+                        container.appendChild(card);
+                    });
+                } else {
+                    loader.innerHTML = '<p>Could not load posts at this time.</p>';
+                }
+            } catch (error) {
+                console.error('Error fetching Medium posts:', error);
+                loader.innerHTML = '<p>Failed to load posts.</p>';
+            }
+        }
+
+        // Simple Search Filter
+        document.getElementById('search-input').addEventListener('keyup', (e) => {
+            const term = e.target.value.toLowerCase();
+            const cards = document.querySelectorAll('.blog-card');
+            
+            cards.forEach(card => {
+                const title = card.getAttribute('data-title') || card.querySelector('.blog-title').innerText.toLowerCase();
+                const tag = card.getAttribute('data-tag') || '';
+                
+                if (title.includes(term) || tag.includes(term)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+
+        document.addEventListener('DOMContentLoaded', fetchMediumPosts);
+    </script>
+</body>
+</html>
