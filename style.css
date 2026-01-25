@@ -51,13 +51,14 @@ input, button, textarea, select {
   flex-direction: column;
 }
 
+/* Main content area */
 main {
-    flex: 1;
+    padding-bottom: 2rem;
 }
 
 /* Header */
 header {
-  padding: var(--spacing-lg) 0;
+  padding: 1rem 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -101,13 +102,13 @@ nav a:hover, nav a.active {
 
 /* Hero Section */
 .hero {
-  padding: var(--spacing-xl) 0;
+  padding: 1.5rem 0;
 }
 
 .hero h1 {
   font-size: 1.75rem;
   font-weight: 700;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.25rem;
   color: var(--text-primary);
   transition: color 0.2s ease;
   cursor: default;
@@ -121,7 +122,7 @@ nav a:hover, nav a.active {
   font-size: 1rem;
   color: var(--text-secondary);
   max-width: 500px;
-  margin-bottom: var(--spacing-md);
+  margin-bottom: 0.5rem;
   line-height: 1.6;
 }
 
@@ -129,13 +130,13 @@ nav a:hover, nav a.active {
   font-size: 0.875rem;
   color: var(--text-secondary);
   line-height: 1.625;
-  margin-bottom: var(--spacing-lg);
+  margin-bottom: var(--spacing-md);
 }
 
 .socials {
   display: flex;
   gap: var(--spacing-md);
-  margin-bottom: var(--spacing-lg);
+  margin-bottom: var(--spacing-md);
 }
 
 .socials a {
@@ -173,7 +174,7 @@ a, a:hover, a:focus, a:active, a:visited {
 
 .btn-primary {
   background-color: var(--accent-color);
-  color: white;
+  color: white !important;
 }
 
 .btn-primary:hover {
@@ -194,6 +195,11 @@ a, a:hover, a:focus, a:active, a:visited {
 
 /* Newsletter */
 /* Newsletter */
+.content-divider-wrapper {
+  margin-top: 2.5rem;   /* mt-10 */
+  padding-top: 2.5rem;  /* pt-10 */
+}
+
 .scribble-line {
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='12' viewBox='0 0 200 12'%3E%3Cpath d='M0 6 C 3 4, 7 8, 12 5 S 18 7, 25 6 S 33 4, 40 7 S 48 5, 55 6 S 62 8, 70 5 S 78 7, 85 6 S 93 4, 100 7 S 108 5, 115 6 S 123 8, 130 5 S 138 7, 145 6 S 153 4, 160 7 S 168 5, 175 6 S 183 8, 190 5 S 198 7, 200 6' stroke='%23d1d5db' fill='none' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
     background-position: 50%;
@@ -201,17 +207,17 @@ a, a:hover, a:focus, a:active, a:visited {
     border: none;
     height: 12px;
     width: 100%;
-    opacity: 1; /* Reset opacity as provided SVG has specific stroke color */
+    opacity: 1;
 }
 
 .mb-8 {
-  margin-bottom: 2rem;
+  margin-bottom: 2rem; /* mb-8 */
 }
 
 .newsletter {
-  margin-top: var(--spacing-lg); /* Reduced top margin since we have separator */
-  padding-top: var(--spacing-sm);
-  border-top: none; /* Removing previous dashed border */
+  margin-top: 0;
+  padding-top: 0;
+  border-top: none;
 }
 
 .newsletter h3 {
@@ -245,10 +251,9 @@ a, a:hover, a:focus, a:active, a:visited {
   border-color: transparent;
 }
 
-/* Footer */
 footer {
-  margin-top: var(--spacing-xl);
-  padding: var(--spacing-lg) 0;
+  margin-top: 0;
+  padding: 2rem 0;
   color: var(--text-secondary);
   font-size: 0.875rem;
 }
