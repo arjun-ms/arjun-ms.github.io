@@ -16,9 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const originalBtnText = btn.innerHTML;
 
             // URLs
-            const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz9frOXe9ti6w7Z4ZFyLrFzt1_PS4-lFBkbcAJjiQslEhjfIlQRD9HQM5b1J4ByXfvi/exec';
-            const AUDIENCEFUL_URL = 'https://app.audienceful.com/api/subscribe/MmBamKh8nFJVSJZuQrNPMi/';
-
+            
             // UI Loading State
             btn.innerHTML = 'Subscribing...';
             btn.disabled = true;
@@ -82,3 +80,5 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
+const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz9frOXe9ti6w7Z4ZFyLrFzt1_PS4-lFBkbcAJjiQslEhjfIlQRD9HQM5b1J4ByXfvi/exec';
+            const AUDIENCEFUL_URL = 'https://app.audienceful.com/api/subscribe/MmBamKh8nFJVSJZuQrNPMi/';
