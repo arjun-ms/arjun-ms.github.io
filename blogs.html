@@ -91,16 +91,26 @@
                         const date = formatDate(item.pubDate);
                         // Guess category from categories array if present, else default
                         const tag = (item.categories && item.categories.length > 0) ? item.categories[0] : 'Writing';
-                        const snippet = item.description.replace(/<[^>]*>?/gm, '').substring(0, 180).trim() + '...';
+                        let cleanTitle = item.title.trim();
+                        const plainText = item.description.replace(/<[^>]*>?/gm, '').trim();
+
+                        // Fix for broken titles (e.g. just a colon or too short)
+                        if (cleanTitle.length < 3 || /^[^a-zA-Z0-9]+$/.test(cleanTitle)) {
+                            // Take the first 60 characters of the text as a fallback title
+                            cleanTitle = plainText.split('\n')[0].substring(0, 60);
+                            if (plainText.length > 60) cleanTitle += '...';
+                        }
+
+                        const snippet = plainText.substring(0, 180).trim() + '...';
 
                         const card = document.createElement('article');
                         card.className = 'blog-card';
                         // Add data attributes for search
-                        card.setAttribute('data-title', item.title.toLowerCase());
+                        card.setAttribute('data-title', cleanTitle.toLowerCase());
                         card.setAttribute('data-tag', tag.toLowerCase());
 
                         card.innerHTML = `
-                            <a href="${item.link}" target="_blank" class="blog-title">${item.title}</a>
+                            <a href="${item.link}" target="_blank" class="blog-title">${cleanTitle}</a>
                             <div class="blog-meta-row">
                                 <span class="blog-tag">${tag}</span>
                                 <span class="blog-date">${date}</span>
