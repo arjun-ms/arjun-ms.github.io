@@ -52,10 +52,13 @@
             <section class="newsletter">
                 <h3><i class="fa-regular fa-paper-plane"></i> Subscribe to my newsletter</h3>
                 <p>Posts and updates on what I'm building, delivered to your inbox.</p>
-                <form class="subscribe-form" onsubmit="event.preventDefault(); alert('Subscribed! (Simulation)');">
-                    <input type="email" placeholder="you@example.com" required>
+                <form class="subscribe-form">
+                    <input type="email" name="email" placeholder="you@example.com" required>
                     <button type="submit" class="btn btn-primary">Subscribe</button>
                 </form>
+                <div class="subscribe-success" style="display: none; color: var(--accent-color); font-weight: 500; margin-top: 1rem;">
+                    <i class="fa-solid fa-check"></i> Thanks for subscribing!
+                </div>
             </section>
         </main>
 
