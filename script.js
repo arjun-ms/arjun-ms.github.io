@@ -1,8 +1,9 @@
-// Subscribe form: single call to Google Apps Script.
-// The script writes to Google Sheets and forwards to Audienceful server-side.
-// No dual-write, no silent failures, no ad-blocker interference.
+// Subscribe form handling: Dual background delivery with keepalive
+// Ensures both Audienceful (real browser headers) and Google Sheets receive submissions,
+// surviving tab closures and avoiding bot-protection blocks.
 
-const SUBSCRIBE_URL = 'https://script.google.com/macros/s/AKfycbz9frOXe9ti6w7Z4ZFyLrFzt1_PS4-lFBkbcAJjiQslEhjfIlQRD9HQM5b1J4ByXfvi/exec';
+const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz9frOXe9ti6w7Z4ZFyLrFzt1_PS4-lFBkbcAJjiQslEhjfIlQRD9HQM5b1J4ByXfvi/exec';
+const AUDIENCEFUL_URL = 'https://app.audienceful.com/api/subscribe/MmBamKh8nFJVSJZuQrNPMi/';
 
 document.addEventListener('DOMContentLoaded', () => {
     const form = document.querySelector('.subscribe-form');
@@ -12,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
             e.preventDefault();
 
             const emailInput = form.querySelector('input[type="email"]');
-            const email = emailInput.value;
+            const email = emailInput.value.trim();
             const btn = form.querySelector('button');
             const originalBtnText = btn.innerHTML;
 
@@ -20,15 +21,33 @@ document.addEventListener('DOMContentLoaded', () => {
             btn.disabled = true;
 
             try {
-                const url = `${SUBSCRIBE_URL}?email=${encodeURIComponent(email)}`;
-
-                // Single call: Google Apps Script handles Sheet + Audienceful
-                await fetch(url, {
+                // 1. Google Sheets request (with keepalive to survive immediate tab close)
+                const googleUrl = `${GOOGLE_SCRIPT_URL}?email=${encodeURIComponent(email)}`;
+                const googlePromise = fetch(googleUrl, {
                     method: 'GET',
-                    mode: 'no-cors'
+                    mode: 'no-cors',
+                    keepalive: true
+                }).catch(err => {
+                    console.error('Google Sheet Error:', err);
                 });
 
-                // Show success (opaque response under no-cors, server handles both destinations)
+                // 2. Audienceful request (direct from browser to pass anti-bot checks)
+                const formData = new FormData();
+                formData.append('email', email);
+
+                const audiencefulPromise = fetch(AUDIENCEFUL_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    keepalive: true,
+                    body: formData
+                }).catch(err => {
+                    console.error('Audienceful Error:', err);
+                });
+
+                // Await both dispatches
+                await Promise.all([googlePromise, audiencefulPromise]);
+
+                // Update UI to success state
                 form.style.display = 'none';
                 const successMsg = document.querySelector('.subscribe-success');
                 if (successMsg) {
